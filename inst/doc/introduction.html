@@ -790,23 +790,20 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <h3>Gains Table &amp; Lift Chart</h3>
 <p>A lift curve is a graphical representation of the % of cumulative events captured at a specific cut-off. The cut-off can be a particular decile or a percentile. Similar, to rank ordering procedure, the data is in descending order of the scores and is then grouped into deciles/percentiles. The cumulative number of observations and events are then computed for each decile/percentile. The lift curve is the created using the cumulative % population as the x-axis and the cumulative percentage of events as the y-axis.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">blr_gains_table</span>(model)</a>
-<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="co">#&gt; Warning: Calling `as_tibble()` on a vector is discouraged, because the</span></a>
-<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="co">#&gt; behavior is likely to change in the future. Use `enframe(name = NULL)`</span></a>
-<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="co">#&gt; instead.</span></a>
-<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="co">#&gt; # A tibble: 10 x 12</span></a>
-<a class="sourceLine" id="cb16-6" data-line-number="6"><span class="co">#&gt;    decile total   `1`   `0`    ks    tp    tn    fp    fn sensitivity</span></a>
-<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="co">#&gt;     &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;       &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb16-8" data-line-number="8"><span class="co">#&gt;  1      1   452   256   196  44.6   256  3808   196   261        49.5</span></a>
-<a class="sourceLine" id="cb16-9" data-line-number="9"><span class="co">#&gt;  2      2   452   128   324  61.3   384  3484   520   133        74.3</span></a>
-<a class="sourceLine" id="cb16-10" data-line-number="10"><span class="co">#&gt;  3      3   452    62   390  63.5   446  3094   910    71        86.3</span></a>
-<a class="sourceLine" id="cb16-11" data-line-number="11"><span class="co">#&gt;  4      4   452    31   421  59.0   477  2673  1331    40        92.3</span></a>
-<a class="sourceLine" id="cb16-12" data-line-number="12"><span class="co">#&gt;  5      5   452    10   442  49.9   487  2231  1773    30        94.2</span></a>
-<a class="sourceLine" id="cb16-13" data-line-number="13"><span class="co">#&gt;  6      6   452    14   438  41.7   501  1793  2211    16        96.9</span></a>
-<a class="sourceLine" id="cb16-14" data-line-number="14"><span class="co">#&gt;  7      7   452     7   445  31.9   508  1348  2656     9        98.3</span></a>
-<a class="sourceLine" id="cb16-15" data-line-number="15"><span class="co">#&gt;  8      8   452     4   448  21.5   512   900  3104     5        99.0</span></a>
-<a class="sourceLine" id="cb16-16" data-line-number="16"><span class="co">#&gt;  9      9   452     3   449  10.9   515   451  3553     2        99.6</span></a>
-<a class="sourceLine" id="cb16-17" data-line-number="17"><span class="co">#&gt; 10     10   453     2   451   0     517     0  4004     0       100  </span></a>
-<a class="sourceLine" id="cb16-18" data-line-number="18"><span class="co">#&gt; # ... with 2 more variables: specificity &lt;dbl&gt;, accuracy &lt;dbl&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="co">#&gt; # A tibble: 10 x 12</span></a>
+<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="co">#&gt;    decile total   `1`   `0`    ks    tp    tn    fp    fn sensitivity</span></a>
+<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="co">#&gt;     &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;       &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="co">#&gt;  1      1   452   256   196  44.6   256  3808   196   261        49.5</span></a>
+<a class="sourceLine" id="cb16-6" data-line-number="6"><span class="co">#&gt;  2      2   452   128   324  61.3   384  3484   520   133        74.3</span></a>
+<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="co">#&gt;  3      3   452    62   390  63.5   446  3094   910    71        86.3</span></a>
+<a class="sourceLine" id="cb16-8" data-line-number="8"><span class="co">#&gt;  4      4   452    31   421  59.0   477  2673  1331    40        92.3</span></a>
+<a class="sourceLine" id="cb16-9" data-line-number="9"><span class="co">#&gt;  5      5   452    10   442  49.9   487  2231  1773    30        94.2</span></a>
+<a class="sourceLine" id="cb16-10" data-line-number="10"><span class="co">#&gt;  6      6   452    14   438  41.7   501  1793  2211    16        96.9</span></a>
+<a class="sourceLine" id="cb16-11" data-line-number="11"><span class="co">#&gt;  7      7   452     7   445  31.9   508  1348  2656     9        98.3</span></a>
+<a class="sourceLine" id="cb16-12" data-line-number="12"><span class="co">#&gt;  8      8   452     4   448  21.5   512   900  3104     5        99.0</span></a>
+<a class="sourceLine" id="cb16-13" data-line-number="13"><span class="co">#&gt;  9      9   452     3   449  10.9   515   451  3553     2        99.6</span></a>
+<a class="sourceLine" id="cb16-14" data-line-number="14"><span class="co">#&gt; 10     10   453     2   451   0     517     0  4004     0       100  </span></a>
+<a class="sourceLine" id="cb16-15" data-line-number="15"><span class="co">#&gt; # ... with 2 more variables: specificity &lt;dbl&gt;, accuracy &lt;dbl&gt;</span></a></code></pre></div>
 <div id="lift-chart" class="section level4">
 <h4>Lift Chart</h4>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">model <span class="op">%&gt;%</span></a>

@@ -6,7 +6,7 @@ library(dplyr)
 
 shinyUI(
   
-navbarPage(HTML("blorr - Build Logistic Regression Models"), id = 'mainpage',
+navbarPage(HTML("blorr"), id = 'mainpage',
              
   source('ui/ui_data.R', local = TRUE)[[1]],
   source('ui/ui_analyze.R', local = TRUE)[[1]],
