@@ -4,8 +4,14 @@
 \alias{blr_ks_chart}
 \title{KS chart}
 \usage{
-blr_ks_chart(gains_table, title = "KS Chart", yaxis_title = " ",
-  xaxis_title = "Cumulative Population \%", ks_line_color = "black")
+blr_ks_chart(
+  gains_table,
+  title = "KS Chart",
+  yaxis_title = " ",
+  xaxis_title = "Cumulative Population \%",
+  ks_line_color = "black",
+  print_plot = TRUE
+)
 }
 \arguments{
 \item{gains_table}{An object of class \code{blr_gains_table}.}
@@ -17,6 +23,8 @@ blr_ks_chart(gains_table, title = "KS Chart", yaxis_title = " ",
 \item{xaxis_title}{X axis title.}
 
 \item{ks_line_color}{Color of the line indicating maximum KS statistic.}
+
+\item{print_plot}{logical; if \code{TRUE}, prints the plot else returns a plot object.}
 }
 \description{
 Kolmogorov-Smirnov (KS) statistics is used to assess predictive power for
@@ -38,13 +46,14 @@ blr_ks_chart(gt)
 \url{https://www.ncbi.nlm.nih.gov/pubmed/843576}
 }
 \seealso{
-Other model validation techniques: \code{\link{blr_confusion_matrix}},
-  \code{\link{blr_decile_capture_rate}},
-  \code{\link{blr_decile_lift_chart}},
-  \code{\link{blr_gains_table}},
-  \code{\link{blr_gini_index}},
-  \code{\link{blr_lorenz_curve}},
-  \code{\link{blr_roc_curve}},
-  \code{\link{blr_test_hosmer_lemeshow}}
+Other model validation techniques: 
+\code{\link{blr_confusion_matrix}()},
+\code{\link{blr_decile_capture_rate}()},
+\code{\link{blr_decile_lift_chart}()},
+\code{\link{blr_gains_table}()},
+\code{\link{blr_gini_index}()},
+\code{\link{blr_lorenz_curve}()},
+\code{\link{blr_roc_curve}()},
+\code{\link{blr_test_hosmer_lemeshow}()}
 }
 \concept{model validation techniques}

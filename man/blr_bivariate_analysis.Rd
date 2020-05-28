@@ -25,8 +25,8 @@ A tibble with the following columns:
 \item{LR p-value}{Likelihood ratio p value}
 }
 \description{
-Information value and likelihood ratio chi square test for initial 
-  variable/predictor selection. Currently avialable for categorical 
+Information value and likelihood ratio chi square test for initial
+  variable/predictor selection. Currently avialable for categorical
   predictors only.
 }
 \examples{
@@ -34,9 +34,11 @@ blr_bivariate_analysis(hsb2, honcomp, female, prog, race, schtyp)
 
 }
 \seealso{
-Other bivariate analysis procedures: \code{\link{blr_segment_dist}},
-  \code{\link{blr_segment_twoway}},
-  \code{\link{blr_segment}},
-  \code{\link{blr_woe_iv_stats}}, \code{\link{blr_woe_iv}}
+Other bivariate analysis procedures: 
+\code{\link{blr_segment_dist}()},
+\code{\link{blr_segment_twoway}()},
+\code{\link{blr_segment}()},
+\code{\link{blr_woe_iv_stats}()},
+\code{\link{blr_woe_iv}()}
 }
 \concept{bivariate analysis procedures}

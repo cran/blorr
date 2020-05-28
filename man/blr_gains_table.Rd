@@ -7,10 +7,17 @@
 \usage{
 blr_gains_table(model, data = NULL)
 
-\method{plot}{blr_gains_table}(x, title = "Lift Chart",
-  xaxis_title = "\% Population", yaxis_title = "\% Cumulative 1s",
-  diag_line_col = "red", lift_curve_col = "blue",
-  plot_title_justify = 0.5, ...)
+\method{plot}{blr_gains_table}(
+  x,
+  title = "Lift Chart",
+  xaxis_title = "\% Population",
+  yaxis_title = "\% Cumulative 1s",
+  diag_line_col = "red",
+  lift_curve_col = "blue",
+  plot_title_justify = 0.5,
+  print_plot = TRUE,
+  ...
+)
 }
 \arguments{
 \item{model}{An object of class \code{glm}.}
@@ -30,6 +37,8 @@ blr_gains_table(model, data = NULL)
 \item{lift_curve_col}{Color of the lift curve.}
 
 \item{plot_title_justify}{Horizontal justification on the plot title.}
+
+\item{print_plot}{logical; if \code{TRUE}, prints the plot else returns a plot object.}
 
 \item{...}{Other inputs.}
 }
@@ -63,12 +72,14 @@ Sobehart  J,  Keenan  S,  Stein  R  (2000):  Benchmarking  Quantitative  Default
 A  Validation Methodology, Moody’s Investors Service.
 }
 \seealso{
-Other model validation techniques: \code{\link{blr_confusion_matrix}},
-  \code{\link{blr_decile_capture_rate}},
-  \code{\link{blr_decile_lift_chart}},
-  \code{\link{blr_gini_index}}, \code{\link{blr_ks_chart}},
-  \code{\link{blr_lorenz_curve}},
-  \code{\link{blr_roc_curve}},
-  \code{\link{blr_test_hosmer_lemeshow}}
+Other model validation techniques: 
+\code{\link{blr_confusion_matrix}()},
+\code{\link{blr_decile_capture_rate}()},
+\code{\link{blr_decile_lift_chart}()},
+\code{\link{blr_gini_index}()},
+\code{\link{blr_ks_chart}()},
+\code{\link{blr_lorenz_curve}()},
+\code{\link{blr_roc_curve}()},
+\code{\link{blr_test_hosmer_lemeshow}()}
 }
 \concept{model validation techniques}

@@ -8,10 +8,9 @@
 \usage{
 blr_step_p_backward(model, ...)
 
-\method{blr_step_p_backward}{default}(model, prem = 0.3,
-  details = FALSE, ...)
+\method{blr_step_p_backward}{default}(model, prem = 0.3, details = FALSE, ...)
 
-\method{plot}{blr_step_p_backward}(x, model = NA, ...)
+\method{plot}{blr_step_p_backward}(x, model = NA, print_plot = TRUE, ...)
 }
 \arguments{
 \item{model}{An object of class \code{lm}; the model should include all
@@ -26,6 +25,8 @@ from the model.}
 each step.}
 
 \item{x}{An object of class \code{blr_step_p_backward}.}
+
+\item{print_plot}{logical; if \code{TRUE}, prints the plot else returns a plot object.}
 }
 \value{
 \code{blr_step_p_backward} returns an object of class \code{"blr_step_p_backward"}.
@@ -63,14 +64,16 @@ k$model
 
 }
 
+
 }
 \references{
 Chatterjee, Samprit and Hadi, Ali. Regression Analysis by Example. 5th ed. N.p.: John Wiley & Sons, 2012. Print.
 }
 \seealso{
-Other variable selection procedures: \code{\link{blr_step_aic_backward}},
-  \code{\link{blr_step_aic_both}},
-  \code{\link{blr_step_aic_forward}},
-  \code{\link{blr_step_p_forward}}
+Other variable selection procedures: 
+\code{\link{blr_step_aic_backward}()},
+\code{\link{blr_step_aic_both}()},
+\code{\link{blr_step_aic_forward}()},
+\code{\link{blr_step_p_forward}()}
 }
 \concept{variable selection procedures}

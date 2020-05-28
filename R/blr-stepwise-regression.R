@@ -14,6 +14,7 @@
 #' @param details Logical; if \code{TRUE}, will print the regression result at
   #' each step.
 #' @param x An object of class \code{blr_step_p_both}.
+#' @param print_plot logical; if \code{TRUE}, prints the plot else returns a plot object.
 #' @param ... Other arguments.
 #' @return \code{blr_step_p_both} returns an object of class \code{"blr_step_p_both"}.
 #' An object of class \code{"blr_step_p_both"} is a list containing the
@@ -65,12 +66,7 @@ blr_step_p_both.default <- function(model, pent = 0.1, prem = 0.3, details = FAL
   blr_check_values(pent, 0, 1)
   blr_check_values(prem, 0, 1)
 
-  response <-
-    model %>%
-    use_series(model) %>%
-    names() %>%
-    extract(1)
-
+  response <- names(model$model)[1]
   l        <- model$data
   nam      <- colnames(attr(model$terms, "factors"))
   df       <- nrow(l) - 2
@@ -102,7 +98,7 @@ blr_step_p_both.default <- function(model, pent = 0.1, prem = 0.3, details = FAL
   }
   cat("\n")
 
-  cat(crayon::bold$red("We are selecting variables based on p value..."))
+  cat("We are selecting variables based on p value...")
   cat("\n")
 
   cat("\n")
@@ -118,17 +114,9 @@ blr_step_p_both.default <- function(model, pent = 0.1, prem = 0.3, details = FAL
     m_sum <- Anova(m, test.statistic = "Wald")
     pvals[i] <- m_sum$`Pr(>Chisq)`[ppos]
     tvals[i] <- m_sum$Chisq[ppos]
-    # m_sum <- summary(m)
-    # pvals[i] <- unname(m_sum$coefficients[, 4])[ppos]
-    # tvals[i] <- unname(m_sum$coefficients[, 3])[ppos]
-    # m <- ols_regress(paste(response, "~", paste(predictors, collapse = " + ")), l)
-    # pvals[i] <- m$pvalues[ppos]
-    # tvals[i] <- m$tvalues[ppos]
   }
 
   minp    <- which(pvals == min(pvals))
-  # tvals   <- abs(tvals)
-  # maxt    <- which(tvals == max(tvals))
   preds   <- all_pred[minp]
   lpreds  <- length(preds)
   fr      <- glm(paste(response, "~", paste(preds, collapse = " + ")), l, family = binomial(link = 'logit'))
@@ -136,32 +124,20 @@ blr_step_p_both.default <- function(model, pent = 0.1, prem = 0.3, details = FAL
   aic     <- mfs$m_aic
   bic     <- mfs$m_bic
   dev     <- mfs$m_deviance
-  # fr      <- ols_regress(paste(response, "~",
-  #                              paste(preds, collapse = " + ")), l)
-  # rsq     <- fr$rsq
-  # adjrsq  <- fr$adjr
-  # cp      <- ols_mallows_cp(fr$model, model)
-  # aic     <- ols_aic(fr$model)
-  # sbc     <- ols_sbc(fr$model)
-  # sbic    <- ols_sbic(fr$model, model)
-  # rmse    <- sqrt(fr$ems)
-  # betas   <- append(betas, fr$betas)
-  # lbetas  <- append(lbetas, length(fr$betas))
-  # pvalues <- append(pvalues, fr$pvalues)
 
-  if (details == TRUE) {
+  if (details) {
     cat("\n")
     cat(paste("Stepwise Selection: Step", step), "\n\n")
   }
 
   if (interactive()) {
-    cat(crayon::green(clisymbols::symbol$tick), crayon::bold(dplyr::last(preds)), "\n")
+    cat(paste("-", rev(preds)[1], "added"), "\n")
   } else {
-    cat(paste("-", dplyr::last(preds), "added"), "\n")
+    cat(paste("-", rev(preds)[1], "added"), "\n")
   }
 
 
-  if (details == TRUE) {
+  if (details) {
     cat("\n")
     m <- blr_regress(paste(response, "~", paste(preds, collapse = " + ")), l)
     print(m)
@@ -190,18 +166,9 @@ blr_step_p_both.default <- function(model, pent = 0.1, prem = 0.3, details = FAL
       m_sum <- Anova(m, test.statistic = "Wald")
       pvals[i] <- m_sum$`Pr(>Chisq)`[ppos]
       tvals[i] <- m_sum$Chisq[ppos]
-      # m_sum <- summary(m)
-      # pvals[i] <- unname(m_sum$coefficients[, 4])[ppos]
-      # tvals[i] <- unname(m_sum$coefficients[, 3])[ppos]
-      # m          <- ols_regress(paste(response, "~",
-      #                                 paste(predictors, collapse = " + ")), l)
-      # pvals[i]   <- m$pvalues[ppos]
-      # tvals[i]   <- m$tvalues[ppos]
     }
 
     minp  <- which(pvals == min(pvals))
-    # tvals <- abs(tvals)
-    # maxt  <- which(tvals == max(tvals))
 
     if (pvals[minp] <= pent) {
 
@@ -215,18 +182,6 @@ blr_step_p_both.default <- function(model, pent = 0.1, prem = 0.3, details = FAL
       aic    <- c(aic, mfs$m_aic)
       bic    <- c(bic, mfs$m_bic)
       dev    <- c(dev, mfs$m_deviance)
-      # fr        <- ols_regress(paste(response, "~",
-      #                                paste(preds, collapse = " + ")), l)
-      # rsq       <- c(rsq, fr$rsq)
-      # adjrsq    <- c(adjrsq, fr$adjr)
-      # aic       <- c(aic, ols_aic(fr$model))
-      # sbc       <- c(sbc, ols_sbc(fr$model))
-      # sbic      <- c(sbic, ols_sbic(fr$model, model))
-      # cp        <- c(cp, ols_mallows_cp(fr$model, model))
-      # rmse      <- c(rmse, sqrt(fr$ems))
-      # betas     <- append(betas, fr$betas)
-      # lbetas    <- append(lbetas, length(fr$betas))
-      # pvalues   <- append(pvalues, fr$pvalues)
 
       if (details == TRUE) {
         cat("\n")
@@ -234,9 +189,9 @@ blr_step_p_both.default <- function(model, pent = 0.1, prem = 0.3, details = FAL
       }
 
       if (interactive()) {
-        cat(crayon::green(clisymbols::symbol$tick), crayon::bold(dplyr::last(preds)), "\n")
+        cat(paste("-", rev(preds)[1], "added"), "\n")
       } else {
-        cat(paste("-", dplyr::last(preds), "added"), "\n")
+        cat(paste("-", rev(preds)[1], "added"), "\n")
       }
 
 
@@ -259,8 +214,6 @@ blr_step_p_both.default <- function(model, pent = 0.1, prem = 0.3, details = FAL
                   family = binomial(link = 'logit'))
       m_sum <- Anova(m2, test.statistic = "Wald")
       pvals_r <- m_sum$`Pr(>Chisq)`
-      # tvals_r <- m_sum$Chisq[ppos]
-      # tvals_r <- abs(unname(m_sum$coefficients[, 3])[-1])
       maxp    <- which(pvals_r == max(pvals_r))
       if (pvals_r[maxp] > prem) {
 
@@ -275,30 +228,20 @@ blr_step_p_both.default <- function(model, pent = 0.1, prem = 0.3, details = FAL
         aic       <- c(aic, mfs$m_aic)
         bic       <- c(bic, mfs$m_bic)
         dev       <- c(dev, mfs$m_deviance)
-        # rsq       <- c(rsq, fr$rsq)
-        # adjrsq    <- c(adjrsq, fr$adjr)
-        # aic       <- c(aic, ols_aic(fr$model))
-        # sbc       <- c(sbc, ols_sbc(fr$model))
-        # sbic      <- c(sbic, ols_sbic(fr$model, model))
-        # cp        <- c(cp, ols_mallows_cp(fr$model, model))
-        # rmse      <- c(rmse, sqrt(fr$ems))
-        # betas     <- append(betas, fr$betas)
-        # lbetas    <- append(lbetas, length(fr$betas))
-        # pvalues   <- append(pvalues, fr$pvalues)
 
-        if (details == TRUE) {
+        if (details) {
           cat("\n")
           cat(paste("Stepwise Selection: Step", all_step), "\n\n")
         }
 
         if (interactive()) {
-          cat(crayon::red(clisymbols::symbol$cross), crayon::bold(dplyr::last(var_index)), "\n")
+          cat(paste("-", rev(var_index)[1], "added"), "\n")
         } else {
-          cat(paste("-", dplyr::last(var_index), "added"), "\n")
+          cat(paste("-", rev(var_index)[1], "added"), "\n")
         }
 
 
-        if (details == TRUE) {
+        if (details) {
           cat("\n")
           m <- blr_regress(paste(response, "~", paste(preds, collapse = " + ")), l)
           print(m)
@@ -310,7 +253,7 @@ blr_step_p_both.default <- function(model, pent = 0.1, prem = 0.3, details = FAL
       }
     } else {
       cat("\n")
-      cat(crayon::bold$red(paste0("No more variables to be added/removed.")))
+      cat("No more variables to be added/removed.")
       cat("\n")
       break
     }
@@ -359,27 +302,28 @@ print.blr_step_p_both <- function(x, ...) {
 #' @export
 #' @rdname blr_step_p_both
 #'
-plot.blr_step_p_both <- function(x, model = NA, ...) {
+plot.blr_step_p_both <- function(x, model = NA, print_plot = TRUE, ...) {
 
   a <- NULL
   b <- NULL
 
   y <- seq_len(x$steps)
 
-  d4 <- tibble(a = y, b = x$aic)
-  d5 <- tibble(a = y, b = x$bic)
-  d6 <- tibble(a = y, b = x$dev)
+  d4 <- data.frame(a = y, b = x$aic)
+  d5 <- data.frame(a = y, b = x$bic)
+  d6 <- data.frame(a = y, b = x$dev)
 
   p4 <- plot_stepwise(d4, "AIC")
   p5 <- plot_stepwise(d5, "BIC")
   p6 <- plot_stepwise(d6, "Deviance")
 
-  # grid.arrange(p1, p2, p3, p4, p5, p6, ncol = 2, top = "Stepwise Regression")
-  myplots <- list(plot_4 = p4, plot_5 = p5, plot_6 = p6)
-  result <- marrangeGrob(myplots, nrow = 2, ncol = 2)
-  result
+  myplots <- list(aic = p4, bic = p5, deviance = p6)
+  
+  if (print_plot) {
+    gridExtra::marrangeGrob(myplots, nrow = 2, ncol = 2)
+  }
 
-
+  invisible(myplots)
 }
 
 plot_stepwise <- function(d, title) {

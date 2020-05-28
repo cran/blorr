@@ -4,10 +4,12 @@
 \alias{blr_plot_diag_fit}
 \title{Fitted values diagnostics plot}
 \usage{
-blr_plot_diag_fit(model)
+blr_plot_diag_fit(model, print_plot = TRUE)
 }
 \arguments{
 \item{model}{An object of class \code{glm}.}
+
+\item{print_plot}{logical; if \code{TRUE}, prints the plot else returns a plot object.}
 }
 \value{
 A panel of diagnostic plots for fitted values.
@@ -28,7 +30,8 @@ Fox, John (1991), Regression Diagnostics. Newbury Park, CA: Sage Publications.
 Cook, R. D. and Weisberg, S. (1982), Residuals and Influence in Regression, New York: Chapman & Hall.
 }
 \seealso{
-Other diagnostic plots: \code{\link{blr_plot_diag_influence}},
-  \code{\link{blr_plot_diag_leverage}}
+Other diagnostic plots: 
+\code{\link{blr_plot_diag_influence}()},
+\code{\link{blr_plot_diag_leverage}()}
 }
 \concept{diagnostic plots}
