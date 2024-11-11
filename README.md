@@ -5,15 +5,14 @@
 
 > Tools for building binary logistic regression models
 
-[![cran
-checks](https://cranchecks.info/badges/summary/blorr)](https://cran.r-project.org/web/checks/check_results_blorr.html)
-[![Travis-CI Build
-Status](https://travis-ci.org/rsquaredacademy/blorr.svg?branch=master)](https://travis-ci.org/rsquaredacademy/blorr)
-[![](https://cranlogs.r-pkg.org/badges/grand-total/blorr)](https://cran.r-project.org/package=blorr)
+<!-- badges: start -->
+
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/blorr)](https://cran.r-project.org/package=blorr)
+[![R-CMD-check](https://github.com/rsquaredacademy/blorr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rsquaredacademy/blorr/actions/workflows/R-CMD-check.yaml)
 [![Coverage
-status](https://codecov.io/gh/rsquaredacademy/blorr/branch/master/graph/badge.svg)](https://codecov.io/github/rsquaredacademy/blorr?branch=master)
-![](https://img.shields.io/badge/lifecycle-maturing-blue.svg)
-[![status](https://tinyverse.netlify.com/badge/blorr)](https://CRAN.R-project.org/package=blorr)
+status](https://app.codecov.io/gh/rsquaredacademy/blorr/branch/master/graph/badge.svg)](https://app.codecov.io/github/rsquaredacademy/blorr?branch=master)
+
+<!-- badges: end -->
 
 ## Overview
 
@@ -29,15 +28,18 @@ building.
 # Install blorr from CRAN
 install.packages("blorr")
 
-# Or the development version from GitHub
+# Install development version from GitHub
 # install.packages("devtools")
 devtools::install_github("rsquaredacademy/blorr")
+
+# Install the development version from `rsquaredacademy` universe
+install.packages("blorr", repos = "https://rsquaredacademy.r-universe.dev")
 ```
 
 ## Articles
 
-  - [A Short Introduction to the blorr
-    Package](https://blorr.rsquaredacademy.com/articles/introduction.html)
+- [A Short Introduction to the blorr
+  Package](https://blorr.rsquaredacademy.com/articles/introduction.html)
 
 ## Usage
 
